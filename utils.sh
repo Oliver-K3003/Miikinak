@@ -29,7 +29,7 @@ install_packages(){
     install_list=()
     for package in "${packages[@]}"; do
         if ! package_installed $package; then
-            install_list+=$package
+            install_list+=("$package")
         fi
     done
 
