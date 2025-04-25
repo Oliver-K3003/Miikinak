@@ -8,12 +8,17 @@ if [ ! -f packages.conf ]; then
     exit 1
 fi
 
+if ! git_installed; then
+    echo "git not found, install before running"
+    exit 1
+fi
+
 source packages.conf
 
 echo "updating system"
 sudo pacman -Syu --noconfirm
 
-if ! command -v yay and ! git_installed &> /dev/null; then
+if ! command -v yay &> /dev/null; then
     echo "installing yay"
     sudo pacman -S --needed git base-devel --noconfirm && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm && cd .. && rm -rf yay
 else
